@@ -9,7 +9,7 @@ module Devise
       end
 
       module ClassMethods
-        def authenticate_with_authzproxy(azp_token,external_ip)
+        def authenticate_with_harvard_auth_proxy(azp_token,external_ip)
           Rails.logger.warn('azp: ' + azp_token)
           Rails.logger.flush
           decrypted_azp_token = decrypt_authzproxy_token(azp_token)

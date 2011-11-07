@@ -13,7 +13,7 @@ module Devise
       # success and the authenticated user if everything is okay. Otherwise redirect
       # to sign in page.
       def authenticate!
-        if resource = mapping.to.authenticate_with_harvard_auth_proxy(params[scope])
+        if resource = mapping.to.authenticate_with_harvard_auth_proxy(params[:_azp_token], request.remote_ip)
           success!(resource)
         else
           fail(:invalid)
