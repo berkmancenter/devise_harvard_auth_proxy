@@ -2,7 +2,7 @@ require 'devise/strategies/authenticatable'
 
 module Devise
   module Strategies
-    # Strategy for signing in a user based on his login and password using LDAP.
+    # Strategy for signing in a user based on the harvard authzproxy token.
     # Redirects to sign_in page if it's not authenticated
     class HarvardAuthProxyAuthenticatable < Authenticatable
       def valid?

@@ -3,6 +3,8 @@
 Very much inspired by:
 
 https://github.com/cschiewek/devise_ldap_authenticatable
+https://github.com/dguettler/Harvard-AuthProxy
+https://github.com/nbudin/devise_cas_authenticatable
 
 == License and Copyright
 

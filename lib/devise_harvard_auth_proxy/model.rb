@@ -1,8 +1,6 @@
-require 'devise_ldap_authenticatable/strategy'
-
 module Devise
   module Models
-    # Authzproxy Module, responsible for validating the user credentials via LDAP.
+    # Authzproxy Module, responsible for validating the authzproxy token and getting user data..
 
     module AuthzproxyAuthenticatable
 

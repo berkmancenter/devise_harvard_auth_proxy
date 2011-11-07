@@ -1,8 +1,8 @@
 # encoding: utf-8
 require 'devise'
+require 'devise_harvard_auth_proxy/strategy'
 require 'devise_harvard_auth_proxy/model'
 require 'devise_harvard_auth_proxy/routes'
-require 'devise_harvard_auth_proxy/strategy'
 
 module Devise
  
@@ -21,4 +21,4 @@ Devise.add_module(:authzproxy_authenticatable,
                   :route => :authzproxy_authenticatable,
                   :strategy   => true,
                   :controller => :hauthproxy,
-                  :model  => 'devise_ldap_authenticatable/model')
+                  :model  => 'devise_harvard_auth_proxy/model')
