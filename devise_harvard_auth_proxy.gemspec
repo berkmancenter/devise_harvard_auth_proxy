@@ -21,8 +21,6 @@ Gem::Specification.new do |s|
     "VERSION",
     "devise_harvard_auth_proxy.gemspec",
     "lib/devise_harvard_auth_proxy.rb",
-    "lib/devise_harvard_auth_proxy/ldap_adapter.rb",
-    "lib/devise_harvard_auth_proxy/logger.rb",
     "lib/devise_harvard_auth_proxy/model.rb",
     "lib/devise_harvard_auth_proxy/routes.rb",
     "lib/devise_harvard_auth_proxy/strategy.rb",
