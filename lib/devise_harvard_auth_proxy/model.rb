@@ -2,9 +2,11 @@ module Devise
   module Models
     # Authzproxy Module, responsible for validating the authzproxy token and getting user data..
 
-    module AuthzproxyAuthenticatable
+    module HarvardAuthProxyAuthenticatable
 
       def self.included(base)
+          Rails.logger.warn('Init!')
+          Rails.logger.flush
         base.extend ClassMethods
       end
 
