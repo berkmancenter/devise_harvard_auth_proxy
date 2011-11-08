@@ -5,20 +5,26 @@ module Devise
     module HarvardAuthProxyAuthenticatable
 
       def self.included(base)
-          Rails.logger.warn('Init!')
-          Rails.logger.flush
+        Rails.logger.warn('Init!')
         base.extend ClassMethods
       end
 
       module ClassMethods
         def authenticate_with_harvard_auth_proxy(azp_token,external_ip)
           Rails.logger.warn('azp: ' + azp_token)
-          Rails.logger.flush
           decrypted_azp_token = decrypt_authzproxy_token(azp_token)
           user_info = parse_and_validate_authzproxy_token(decrypted_azp_token,external_ip)
           Rails.logger.warn('User info: ' + user_info.inspect)
-          Rails.logger.flush
-          return user_info
+          return nil if user_info.nil?
+
+          # Find the user account.
+          resource = find(:first, :conditions => { Devise.identifier => user_info[Devise.identifier]})
+          if resource.nil?
+            resource = new(user_info)
+            resource.save!
+          end
+
+          return resource
         end
 
         private

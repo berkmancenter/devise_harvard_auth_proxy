@@ -12,6 +12,7 @@ module Devise
   @@authen_application = nil
   @@pin_url = 'https://www.pin1.harvard.edu/pin/authenticate?__authen_application='
   @@user_attributes = ['user_id','time_stamp','app_id','id_type']
+  @@identifier = 'guid'
 
   mattr_accessor :gpg_home, :gpg_passphrase, :authen_application, :pin_url, :user_attributes
   
