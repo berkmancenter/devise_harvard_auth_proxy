@@ -16,7 +16,6 @@ module Devise
           user_info = parse_and_validate_authzproxy_token(decrypted_azp_token,external_ip)
           Rails.logger.warn('User info: ' + user_info.inspect)
           return nil if user_info.nil?
-
           # Find the user account.
           resource = find(:first, :conditions => { Devise.identifier => user_info[Devise.identifier]})
           if resource.nil?
