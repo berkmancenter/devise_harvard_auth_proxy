@@ -19,6 +19,7 @@ module Devise
 end
 
 Devise.add_module(:authzproxy_authenticatable,
-                  :route => :harvard_auth_proxy,
+                  :route => :harvard_auth_proxy_authenticatable,
+                  :controller => :hauthproxy,
                   :strategy   => true,
                   :model  => 'devise_harvard_auth_proxy/model')
