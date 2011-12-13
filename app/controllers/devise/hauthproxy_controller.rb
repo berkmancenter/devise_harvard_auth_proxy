@@ -1,4 +1,6 @@
 class Devise::HauthproxyController < Devise::SessionsController
+  unloadable
+
   def valid
     warden.authenticate!(:scope => resource_name)
   end
