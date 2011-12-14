@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Collis-Puro"]
-  s.date = "2011-12-13"
+  s.date = "2011-12-14"
   s.description = "Harvard Auth Proxy module for Devise"
   s.email = "djcp@cyber.law.harvard.edu"
   s.extra_rdoc_files = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     "app/controllers/devise/hauthproxy_controller.rb",
     "devise_harvard_auth_proxy.gemspec",
     "lib/devise_harvard_auth_proxy.rb",
+    "lib/devise_harvard_auth_proxy/failure_app.rb",
     "lib/devise_harvard_auth_proxy/model.rb",
     "lib/devise_harvard_auth_proxy/routes.rb",
     "lib/devise_harvard_auth_proxy/strategy.rb",
