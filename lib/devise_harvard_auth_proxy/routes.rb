@@ -6,9 +6,9 @@ if ActionController::Routing.name =~ /ActionDispatch/
 
     def devise_harvard_auth_proxy_authenticatable(mapping, controllers)
       
-      Rails.logger.warn('instantiating routes')
-      Rails.logger.warn("Mapping: #{mapping.inspect}")
-      Rails.logger.warn("Controllers: #{controllers.inspect}")
+      Rails.logger.warn('instantiating routes') if Devise.debug
+      Rails.logger.warn("Mapping: #{mapping.inspect}") if Devise.debug
+      Rails.logger.warn("Controllers: #{controllers.inspect}") if Devise.debug
 
       get "hauthproxy/valid", :to => "#{controllers[:hauthproxy]}#valid"
       get "hauthproxy/invalid", :to => "#{controllers[:hauthproxy]}#invalid"

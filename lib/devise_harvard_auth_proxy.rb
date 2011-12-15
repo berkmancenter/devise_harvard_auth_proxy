@@ -3,7 +3,6 @@ require 'devise'
 require 'devise_harvard_auth_proxy/model'
 require 'devise_harvard_auth_proxy/strategy'
 require 'devise_harvard_auth_proxy/routes'
-#require 'devise_harvard_auth_proxy/failure_app'
 
 # Register as a Rails engine if Rails::Engine exists
 begin
@@ -23,11 +22,19 @@ module Devise
   @@gpg_passphrase = nil
   @@authen_application = nil
   @@pin_url = 'https://www.pin1.harvard.edu/pin/authenticate?__authen_application='
-  @@user_attributes = ['user_id','time_stamp','app_id','id_type']
-  @@identifier = 'mail'
+  @@creation_attributes = Proc.new do |user,user_info,authentication_info|
+    Rails.logger.warn("User in proc: #{user.inspect}")
+    Rails.logger.warn("User info in proc: #{user_info.inspect}")
+    Rails.logger.warn("Auth info in proc: #{authentication_info.inspect}")
+    user.mail = user_info[:mail]
+    user.edupersonaffiliation = user_info[:edupersonaffiliation]
+    user.guid = authentication_info[:user_id]
+  end
+  @@identifier = :mail
   @@post_logout_url = '/'
+  @@debug = false
 
-  mattr_accessor :gpg_home, :gpg_path, :gpg_passphrase, :authen_application, :pin_url, :user_attributes, :identifier, :post_logout_url
+  mattr_accessor :gpg_home, :gpg_path, :gpg_passphrase, :authen_application, :pin_url, :creation_attributes, :identifier, :post_logout_url, :debug
   
 end
 

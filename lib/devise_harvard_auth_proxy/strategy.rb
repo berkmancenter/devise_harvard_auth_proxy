@@ -14,16 +14,16 @@ module Devise
       # to sign in page.
       def authenticate!
         unless params[:_azp_token].blank?
-          Rails.logger.warn('In authenticate!')
+          Rails.logger.warn('In authenticate!') if Devise.debug
           if resource = mapping.to.authenticate_with_harvard_auth_proxy(params[:_azp_token], request.remote_ip)
-            Rails.logger.warn('In authenticate!: success!')
+            Rails.logger.warn('In authenticate!: success!') if Devise.debug
             success!(resource)
           else
-            Rails.logger.warn('In authenticate!: fail!')
+            Rails.logger.warn('In authenticate!: fail!') if Devise.debug
             redirect!("#{Devise.pin_url}#{Devise.authen_application}&_redirect_to=" + CGI.escape(params[:_redirect_to]))
           end
         else
-          Rails.logger.warn('In authenticate!: no token!')
+          Rails.logger.warn('In authenticate!: no token!') if Devise.debug
           redirect!("#{Devise.pin_url}#{Devise.authen_application}&_redirect_to=" + CGI.escape(request.url))
         end
       end
