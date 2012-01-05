@@ -77,14 +77,17 @@ module Devise
 
           Rails.logger.warn("user_id: #{user_id} || time_stamp: #{time_stamp} || external_ip: #{external_ip} || user_ip: #{user_ip} || app_id: #{app_id} || id_type: #{id_type}") if Devise.debug
 
-          # check against ip address.
-          return false unless user_ip == external_ip
+          unless Devise.disable_token_authenticity_checks
+            # check against ip address.
+            return false unless user_ip == external_ip
 
-          # check for expired time_stamp
-          return false if Time.parse(time_stamp).localtime + 120 < Time.now
+            # check for expired time_stamp
+            return false if Time.parse(time_stamp).localtime + 120 < Time.now
 
-          # check for invalid application ID
-          return false if app_id != Devise.authen_application
+            # check for invalid application ID
+            return false if app_id != Devise.authen_application
+          end
+
           return authentication_info
         end
 

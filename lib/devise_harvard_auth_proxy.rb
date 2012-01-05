@@ -33,8 +33,12 @@ module Devise
   @@identifier = :mail
   @@post_logout_url = '/'
   @@debug = false
+  @@disable_token_authenticity_checks = false
 
-  mattr_accessor :gpg_home, :gpg_path, :gpg_passphrase, :authen_application, :pin_url, :creation_attributes, :identifier, :post_logout_url, :debug
+  mattr_accessor :gpg_home, :gpg_path, :gpg_passphrase, 
+    :authen_application, :pin_url, :creation_attributes, 
+    :identifier, :post_logout_url, :debug, 
+    :disable_token_authenticity_checks
   
 end
 
