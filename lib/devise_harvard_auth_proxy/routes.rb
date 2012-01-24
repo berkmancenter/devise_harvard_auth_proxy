@@ -14,6 +14,7 @@ if ActionController::Routing.name =~ /ActionDispatch/
       get "hauthproxy/invalid", :to => "#{controllers[:hauthproxy]}#invalid"
       get "hauthproxy/sign_in", :to => "#{controllers[:hauthproxy]}#sign_in"
       delete "hauthproxy/sign_out", :to => "#{controllers[:hauthproxy]}#sign_out"
+      delete "hauthproxy/sign_out", :to => "#{controllers[:hauthproxy]}#sign_out", :as => :destroy_user_session
     end
   
   end

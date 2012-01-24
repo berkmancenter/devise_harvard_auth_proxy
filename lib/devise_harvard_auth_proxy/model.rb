@@ -18,7 +18,11 @@ module Devise
           Rails.logger.warn('Parsed token information: ' + token_info.inspect) if Devise.debug
           return nil if token_info.nil?
           # Find the user account.
-          resource = find(:first, :conditions => { Devise.identifier => token_info[:user_info][Devise.identifier]})
+          logger.warn('class: ' + self.inspect) if Devise.debug
+          resource = Devise.find_resource.call(self,token_info[:user_info],token_info[:authentication_info])
+
+          logger.warn('Resource we found is: ' + resource.inspect) if Devise.debug
+
           if resource.nil?
             resource = new
             Devise.creation_attributes.call(resource,token_info[:user_info], token_info[:authentication_info])

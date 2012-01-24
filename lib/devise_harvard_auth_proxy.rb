@@ -22,23 +22,29 @@ module Devise
   @@gpg_passphrase = nil
   @@authen_application = nil
   @@pin_url = 'https://www.pin1.harvard.edu/pin/authenticate?__authen_application='
+
+  @@find_resource = Proc.new do |klass, user_info, authentication_info|
+    klass.find(:first, :conditions => { Devise.app_unique_user_column => user_info[Devise.pin_unique_user_attribute]})
+  end
   @@creation_attributes = Proc.new do |user,user_info,authentication_info|
-    Rails.logger.warn("User in proc: #{user.inspect}")
-    Rails.logger.warn("User info in proc: #{user_info.inspect}")
-    Rails.logger.warn("Auth info in proc: #{authentication_info.inspect}")
-    user.mail = user_info[:mail]
+    Rails.logger.warn("User in proc: #{user.inspect}") if Devise.debug
+    Rails.logger.warn("User info in proc: #{user_info.inspect}") if Devise.debug
+    Rails.logger.warn("Auth info in proc: #{authentication_info.inspect}") if Devise.debug
+
+    user.email = user_info[:mail]
     user.edupersonaffiliation = user_info[:edupersonaffiliation]
     user.guid = authentication_info[:user_id]
   end
-  @@identifier = :mail
+  @@pin_unique_user_attribute = :mail
+  @@app_unique_user_column = :email
   @@post_logout_url = '/'
   @@debug = false
   @@disable_token_authenticity_checks = false
 
   mattr_accessor :gpg_home, :gpg_path, :gpg_passphrase, 
     :authen_application, :pin_url, :creation_attributes, 
-    :identifier, :post_logout_url, :debug, 
-    :disable_token_authenticity_checks
+    :pin_unique_user_attribute, :app_unique_user_column, :post_logout_url, :debug, 
+    :disable_token_authenticity_checks, :find_resource
   
 end
 
