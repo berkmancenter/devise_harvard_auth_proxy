@@ -6,7 +6,8 @@ module Devise
     # Redirects to sign_in page if it's not authenticated
     class HarvardAuthProxyAuthenticatable < Base
       def valid?
-        mapping.to.respond_to?(:authenticate_with_harvard_auth_proxy) 
+        mapping.to.respond_to?(:authenticate_with_harvard_auth_proxy) &&
+          (!params.include?(:user) || !params[:user].include?(:password))
       end
 
       # Authenticate a user based on login and password params, returning to warden
